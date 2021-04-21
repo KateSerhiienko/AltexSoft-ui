@@ -47,6 +47,7 @@ $green: #a7c353;
 }
 
 .container {
+  max-width: 1200px;
   width: 1000px;
   background-color: $black;
   margin: 0 auto;
@@ -120,10 +121,15 @@ $green: #a7c353;
       padding-right: 0;
     }
 
-    &:first-of-type,
+    &_choosed {
+      background-color: $green;
+      color: $white;
+    }
+
     &:hover {
       background-color: $green;
       color: $white;
+      opacity: 0.5;
     }
   }
 }
@@ -586,7 +592,8 @@ $small: 0.6;
 
 @media screen and (min-width: 1200px) {
   .container {
-    width: 1000px * $large;
+    max-width: 1200px;
+    width: 100%;
   }
 
   .green-line {
@@ -1306,7 +1313,7 @@ $small: 0.6;
 
 @media screen and (max-width: 899px) {
   .container {
-    width: 1000px * $normal;
+    max-width: 1000px * $normal;
   }
 
   .green-line {

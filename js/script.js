@@ -1,3 +1,16 @@
+let menuItems = document.querySelectorAll(".menu__item");
+
+for (let i = 0; i < menuItems.length; i++){
+    menuItems[i].addEventListener("click", () => {
+        menuItems.forEach(e => {
+            e.classList.remove("menu__item_choosed");
+            console.log(e);
+        })
+    
+        menuItems[i].classList.add("menu__item_choosed");
+    })
+}
+
 const prev = document.querySelector(".arrow__prev"),
     next = document.querySelector(".arrow__next"),
     slider = document.querySelectorAll(".slider__img"),
