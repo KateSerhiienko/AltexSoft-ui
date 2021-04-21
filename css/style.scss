@@ -1,0 +1,2457 @@
+@import "_reset";
+
+@font-face {
+  font-family: "Georgia";
+  src: url(../fonts/Georgia.woff);
+}
+
+//colors
+
+$white: #ffffff;
+$white-dark: #e2e2e2;
+$black-dark: #000000;
+$black: #313131;
+$black-light: #383838;
+$grey-dark: #666666;
+$grey-light: #979797;
+$green: #a7c353;
+
+//mixins
+
+@mixin article-header($n: 1) {
+  font-size: 22px * $n;
+  margin-bottom: 25px * $n;
+  color: $grey-light;
+  font-weight: 700;
+}
+
+@mixin article-more($n: 1) {
+  text-align: right;
+  color: $green;
+  font-size: 13px * $n;
+  letter-spacing: 0.3px * $n;
+  transition: 0.3s;
+
+  &:hover {
+    color: $black;
+  }
+}
+
+@mixin footer-header($n: 1) {
+  padding-top: 39px * $n;
+  padding-bottom: 16px * $n;
+  margin-bottom: 16px * $n;
+  color: $white;
+  font-size: 16px * $n;
+  border-bottom: 1px * $n solid $black-light;
+}
+
+.container {
+  width: 1000px;
+  background-color: $black;
+  margin: 0 auto;
+  overflow: hidden;
+  font-family: "Georgia", serif;
+}
+
+.green-line {
+  width: 960px;
+  margin: 0 auto;
+  height: 5px;
+  background-color: $green;
+}
+
+.wrapper {
+  width: 960px;
+  background-color: $white;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  height: 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  &__name {
+    font-size: 26px;
+    text-transform: uppercase;
+    line-height: 24px;
+    color: $grey-dark;
+
+    &::first-letter {
+      font-size: 32px;
+    }
+  }
+
+  &__tagline {
+    color: $grey-light;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+}
+.menu {
+  height: 100%;
+
+  &__burger {
+    display: none;
+  }
+
+  &__list {
+    width: 633px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item {
+    height: 100%;
+    text-align: center;
+    padding: 51px 16px 0;
+    font-size: 14px;
+    color: $grey-light;
+    transition: 0.3s;
+
+    &:last-of-type {
+      text-align: right;
+      padding-right: 0;
+    }
+
+    &:first-of-type,
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+  }
+}
+
+.main {
+  padding-bottom: 40px;
+}
+
+.gallery {
+  height: 562px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 37px;
+  border-top: 1px solid $green;
+
+  &__quote {
+    width: 760px;
+    margin-bottom: 37px;
+    text-align: center;
+    line-height: 31px;
+    font-size: 22px;
+    font-style: italic;
+    color: $grey-dark;
+  }
+}
+.slider {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 385px;
+
+  &__text {
+    width: 350px;
+    position: absolute;
+    bottom: 58px;
+    right: 62px;
+    z-index: 3;
+  }
+
+  &__header {
+    margin-bottom: 10px;
+    padding: 9px 0;
+    text-align: center;
+    background-color: $green;
+    color: $white;
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  &__description {
+    padding: 11px 12px;
+    background-color: $white;
+    color: $grey-light;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    line-height: 15px;
+  }
+
+  &__photos {
+    position: relative;
+    overflow: hidden;
+    width: 920px;
+    height: 350px;
+  }
+
+  &__img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    opacity: 0.5;
+
+    &_display {
+      z-index: 1;
+      transition: 0.3s;
+      opacity: 1;
+    }
+  }
+
+  &__arrows {
+    position: absolute;
+    top: 142px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    cursor: pointer;
+    z-index: 2;
+
+    .arrow {
+      &__prev,
+      &__next {
+        width: 52px;
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 2px solid $green;
+        background-color: $black-dark;
+        fill: $green;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: $green;
+          fill: $black-dark;
+        }
+      }
+
+      &__svg {
+        width: 15px;
+      }
+    }
+  }
+
+  &__dots {
+    width: 94px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $green;
+    border: 3px solid $green;
+    transition: 0.3s;
+
+    &_selected {
+      background-color: $white;
+    }
+  }
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px;
+  padding-top: 39px;
+  border-top: 1px solid $white-dark;
+}
+
+.about {
+  &__header {
+    @include article-header;
+  }
+
+  &__photo {
+    padding: 4px;
+    border: 1px solid $white-dark;
+  }
+
+  &__img {
+    width: 270px;
+    height: 140px;
+  }
+
+  &__description {
+    margin-top: 18.5px;
+    font-size: 13px;
+    letter-spacing: 0.45px;
+    line-height: 18px;
+    color: $grey-light;
+  }
+
+  &__more {
+    @include article-more;
+    margin-top: 20px;
+  }
+}
+.services {
+  &__header {
+    @include article-header;
+  }
+
+  &__item {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  &__img {
+    width: 64px;
+    height: 64px;
+  }
+
+  &__text {
+    margin-left: 18px;
+    color: $grey-light;
+  }
+
+  &__title {
+    margin-bottom: 4px;
+    line-height: 21px;
+    font-size: 14px;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+  }
+
+  &__description {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.37px;
+  }
+
+  &__more {
+    @include article-more;
+    line-height: 1px;
+  }
+}
+.comments {
+  &__header {
+    @include article-header;
+    margin-bottom: 16px;
+  }
+
+  &__item {
+    color: $grey-light;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__quotes {
+    width: 53px;
+    height: 44px;
+  }
+
+  &__name {
+    font-size: 16px;
+    margin-left: 10px;
+    letter-spacing: 1.6px;
+    letter-spacing: 1px;
+
+    &_bold {
+      font-weight: 700;
+    }
+  }
+
+  &__text {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  &__more {
+    @include article-more;
+    line-height: 24px;
+  }
+}
+.footer {
+  &__wrapper {
+    width: 960px;
+    background-color: $black;
+    margin: 0 auto;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $black-light;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0 21px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: $grey-light;
+  }
+}
+.details {
+  &__header {
+    @include footer-header;
+  }
+
+  &__items {
+    margin-bottom: 15px;
+  }
+
+  &__item {
+    font-size: 12px;
+    color: $grey-light;
+    line-height: 19px;
+    letter-spacing: 0.6px;
+  }
+
+  &__mail {
+    color: $green;
+    transition: 0.3s;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+}
+.social {
+  &__header {
+    @include footer-header;
+  }
+
+  &__item {
+    display: flex;
+    margin-bottom: 14px;
+    border-bottom: 1px solid $black-light;
+    font-size: 13px;
+    color: $green;
+    transition: 0.3s;
+
+    &:hover {
+      color: $white;
+      .social__round {
+        border: 1px solid $green;
+      }
+      .social__svg {
+        fill: $green;
+      }
+    }
+  }
+
+  &__round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: $black-light;
+    border: 1px solid $black;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+
+  &__svg {
+    width: 15px;
+    height: 15px;
+    fill: $white;
+    transition: 0.3s;
+  }
+
+  &__link {
+    padding-left: 10px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+  }
+}
+.blog {
+  &__header {
+    @include footer-header;
+  }
+
+  &__item {
+    color: $grey-light;
+    margin-bottom: 7px;
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 1.4px;
+  }
+
+  &__autor {
+    font-size: 11px;
+    line-height: 22px;
+    letter-spacing: 1px;
+  }
+
+  &__text {
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.65px;
+  }
+
+  &__more {
+    text-align: right;
+    font-size: 12px;
+    line-height: 31px;
+    color: $green;
+    transition: 0.3s;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+.contact-us {
+  &__header {
+    @include footer-header;
+  }
+
+  &__form {
+    padding-top: 2px;
+  }
+
+  &__name,
+  &__email,
+  &__message {
+    width: 100%;
+    font-size: 13px;
+    margin-bottom: 11px;
+    background-color: $black-light;
+    border-radius: 5px;
+    padding: 8px 10px;
+    color: $grey-light;
+    transition: 0.3s;
+
+    &:hover,
+    &:focus {
+      background-color: $grey-light;
+      color: $black;
+    }
+  }
+
+  &__message {
+    height: 110px;
+    resize: none;
+    margin-bottom: 6px;
+  }
+
+  &__button {
+    padding: 7px 14px;
+    background-color: $green;
+    border-radius: 5px;
+    color: $black;
+    border: 1px solid $green;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $black;
+      color: $green;
+      border: 1px solid $green;
+    }
+  }
+}
+
+$large: 1.2;
+$base: 0.9;
+$normal: 0.8;
+$middle: 0.7;
+$small: 0.6;
+
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 1000px * $large;
+  }
+
+  .green-line {
+    width: 960px * $large;
+    margin: 0 auto;
+    height: 5px * $large;
+  }
+
+  .wrapper {
+    width: 960px * $large;
+    padding: 0 20px * $large;
+  }
+
+  .header {
+    height: 96px * $large;
+  }
+
+  .logo {
+    &__name {
+      font-size: 26px * $large;
+      line-height: 24px * $large;
+
+      &::first-letter {
+        font-size: 32px * $large;
+      }
+    }
+
+    &__tagline {
+      font-size: 12px * $large;
+      letter-spacing: 0.3px * $large;
+    }
+  }
+  .menu {
+    &__list {
+      width: 633px * $large;
+    }
+
+    &__item {
+      padding: 51px * $large 16px * $large 0;
+      font-size: 14px * $large;
+    }
+  }
+
+  .main {
+    padding-bottom: 37px * $large;
+  }
+
+  .gallery {
+    height: 562px * $large;
+    padding-top: 37px * $large;
+    border-top: 1px * $large solid $green;
+
+    &__quote {
+      width: 760px * $large;
+      margin-bottom: 37px * $large;
+      line-height: 31px * $large;
+      font-size: 22px * $large;
+    }
+  }
+  .slider {
+    height: 385px * $large;
+
+    &__text {
+      width: 350px * $large;
+      bottom: 58px * $large;
+      right: 62px * $large;
+    }
+
+    &__header {
+      margin-bottom: 10px * $large;
+      padding: 9px * $large 0;
+      text-align: center;
+      font-size: 22px * $large;
+      line-height: 22px * $large;
+    }
+
+    &__description {
+      padding: 11px * $large 12px * $large;
+      font-size: 13px * $large;
+      letter-spacing: 0.5px * $large;
+      line-height: 15px * $large;
+    }
+
+    &__photos {
+      width: 920px * $large;
+      height: 350px * $large;
+    }
+
+    &__arrows {
+      top: 142px * $large;
+      padding: 0 10px * $large;
+
+      .arrow {
+        &__prev,
+        &__next {
+          width: 52px * $large;
+          height: 52px * $large;
+          border: 2px * $large solid $green;
+        }
+
+        &__svg {
+          width: 15px * $large;
+        }
+      }
+    }
+
+    &__dots {
+      width: 94px * $large;
+    }
+
+    &__dot {
+      width: 15px * $large;
+      height: 15px * $large;
+      border: 3px * $large solid $green;
+    }
+  }
+
+  .articles {
+    grid-gap: 40px * $large;
+    padding-top: 39px * $large;
+    border-top: 1px * $large solid $white-dark;
+  }
+
+  .about {
+    &__header {
+      @include article-header($large);
+    }
+
+    &__photo {
+      padding: 4px * $large;
+      border: 1px * $large solid $white-dark;
+    }
+
+    &__img {
+      width: 270px * $large;
+      height: 140px * $large;
+    }
+
+    &__description {
+      margin-top: 18.5px * $large;
+      font-size: 13px * $large;
+      letter-spacing: 0.45px * $large;
+      line-height: 19px * $large;
+    }
+
+    &__more {
+      @include article-more($large);
+      margin-top: 20px * $large;
+    }
+  }
+  .services {
+    &__header {
+      @include article-header($large);
+    }
+
+    &__item {
+      margin-bottom: 17px * $large;
+    }
+
+    &__img {
+      width: 64px * $large;
+      height: 64px * $large;
+    }
+
+    &__text {
+      margin-left: 18px * $large;
+    }
+
+    &__title {
+      margin-bottom: 4px * $large;
+      line-height: 21px * $large;
+      font-size: 14px * $large;
+      letter-spacing: 1.3px * $large;
+    }
+
+    &__description {
+      font-size: 13px * $large;
+      line-height: 18px * $large;
+      letter-spacing: 0.37px * $large;
+    }
+
+    &__more {
+      @include article-more($large);
+      line-height: 1px * $large;
+    }
+  }
+  .comments {
+    &__header {
+      @include article-header($large);
+      margin-bottom: 13px * $large;
+    }
+
+    &__item {
+      margin-bottom: 12px * $large;
+    }
+
+    &__title {
+      margin-bottom: 8px * $large;
+    }
+
+    &__quotes {
+      width: 53px * $large;
+      height: 44px * $large;
+    }
+
+    &__name {
+      font-size: 16px * $large;
+      margin-left: 10px * $large;
+      letter-spacing: 1.6px * $large;
+      letter-spacing: 1px * $large;
+    }
+
+    &__text {
+      font-size: 13px * $large;
+      line-height: 19px * $large;
+      letter-spacing: 0.5px * $large;
+    }
+
+    &__more {
+      @include article-more($large);
+      line-height: 24px * $large;
+    }
+  }
+  .footer {
+    &__wrapper {
+      width: 960px * $large;
+    }
+
+    &__top {
+      grid-gap: 18px * $large;
+      padding-bottom: 12px * $large;
+      border-bottom: 1px * $large solid $black-light;
+    }
+
+    &__bottom {
+      padding: 22px * $large 0 21px * $large;
+      font-size: 12px * $large;
+      letter-spacing: 0.5px * $large;
+    }
+  }
+  .details {
+    &__header {
+      @include footer-header($large);
+    }
+
+    &__items {
+      margin-bottom: 15px * $large;
+    }
+
+    &__item {
+      font-size: 12px * $large;
+      line-height: 19.5px * $large;
+      letter-spacing: 0.6px * $large;
+    }
+  }
+  .social {
+    &__header {
+      @include footer-header($large);
+    }
+
+    &__item {
+      margin-bottom: 16px * $large;
+      border-bottom: 1px * $large solid $black-light;
+      font-size: 13px * $large;
+
+      &:hover {
+        .social__round {
+          border: 1px * $large solid $green;
+        }
+      }
+    }
+
+    &__round {
+      width: 32px * $large;
+      height: 32px * $large;
+      border: 1px * $large solid $black;
+    }
+
+    &__svg {
+      width: 15px * $large;
+      height: 15px * $large;
+    }
+
+    &__link {
+      padding-left: 10px * $large;
+      padding-top: 12px * $large;
+      padding-bottom: 14px * $large;
+    }
+  }
+  .blog {
+    &__header {
+      @include footer-header($large);
+    }
+
+    &__item {
+      margin-bottom: 7px * $large;
+    }
+
+    &__title {
+      font-size: 13px * $large;
+      line-height: 20px * $large;
+      letter-spacing: 1.4px * $large;
+    }
+
+    &__autor {
+      font-size: 11px * $large;
+      line-height: 22px * $large;
+      letter-spacing: 1px * $large;
+    }
+
+    &__text {
+      font-size: 12px * $large;
+      line-height: 20px * $large;
+      letter-spacing: 0.65px * $large;
+    }
+
+    &__more {
+      font-size: 12px * $large;
+      line-height: 31px * $large;
+    }
+  }
+  .contact-us {
+    &__header {
+      @include footer-header($large);
+    }
+
+    &__form {
+      padding-top: 2px * $large;
+    }
+
+    &__name,
+    &__email,
+    &__message {
+      margin-bottom: 12px * $large;
+      border-radius: 5px * $large;
+      padding: 8px * $large 10px * $large;
+      font-size: 13px * $large;
+    }
+
+    &__message {
+      height: 110px * $large;
+      margin-bottom: 6px * $large;
+    }
+
+    &__button {
+      padding: 7px * $large 14px * $large;
+      border-radius: 5px * $large;
+      border: 1px * $large solid $green;
+      font-size: 13px * $large;
+
+      &:hover {
+        border: 1px * $large solid $green;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .container {
+    width: 1000px * $base;
+  }
+
+  .green-line {
+    width: 960px * $base;
+    margin: 0 auto;
+    height: 5px * $base;
+  }
+
+  .wrapper {
+    width: 960px * $base;
+    padding: 0 20px * $base;
+  }
+
+  .header {
+    height: 96px * $base;
+  }
+
+  .logo {
+    &__name {
+      font-size: 26px * $base;
+      line-height: 24px * $base;
+
+      &::first-letter {
+        font-size: 32px * $base;
+      }
+    }
+
+    &__tagline {
+      font-size: 12px * $base;
+      letter-spacing: 0.3px * $base;
+    }
+  }
+  .menu {
+    &__list {
+      width: 633px * $base;
+    }
+
+    &__item {
+      padding: 51px * $base 16px * $base 0;
+      font-size: 14px * $base;
+    }
+  }
+
+  .main {
+    padding-bottom: 37px * $base;
+  }
+
+  .gallery {
+    height: 562px * $base;
+    padding-top: 37px * $base;
+    border-top: 1px * $base solid $green;
+
+    &__quote {
+      width: 760px * $base;
+      margin-bottom: 37px * $base;
+      line-height: 31px * $base;
+      font-size: 22px * $base;
+    }
+  }
+  .slider {
+    height: 385px * $base;
+
+    &__text {
+      width: 350px * $base;
+      bottom: 58px * $base;
+      right: 62px * $base;
+    }
+
+    &__header {
+      margin-bottom: 10px * $base;
+      padding: 9px * $base 0;
+      text-align: center;
+      font-size: 22px * $base;
+      line-height: 22px * $base;
+    }
+
+    &__description {
+      padding: 11px * $base 12px * $base;
+      font-size: 13px * $base;
+      letter-spacing: 0.5px * $base;
+      line-height: 15px * $base;
+    }
+
+    &__photos {
+      width: 920px * $base;
+      height: 350px * $base;
+    }
+
+    &__arrows {
+      top: 142px * $base;
+      padding: 0 10px * $base;
+
+      .arrow {
+        &__prev,
+        &__next {
+          width: 52px * $base;
+          height: 52px * $base;
+          border: 2px * $base solid $green;
+        }
+
+        &__svg {
+          width: 15px * $base;
+        }
+      }
+    }
+
+    &__dots {
+      width: 94px * $base;
+    }
+
+    &__dot {
+      width: 15px * $base;
+      height: 15px * $base;
+      border: 3px * $base solid $green;
+    }
+  }
+
+  .articles {
+    grid-gap: 40px * $base;
+    padding-top: 39px * $base;
+    border-top: 1px * $base solid $white-dark;
+  }
+
+  .about {
+    &__header {
+      @include article-header($base);
+    }
+
+    &__photo {
+      padding: 4px * $base;
+      border: 1px * $base solid $white-dark;
+    }
+
+    &__img {
+      width: 270px * $base;
+      height: 140px * $base;
+    }
+
+    &__description {
+      margin-top: 18.5px * $base;
+      font-size: 13px * $base;
+      letter-spacing: 0.45px * $base;
+      line-height: 19px * $base;
+    }
+
+    &__more {
+      @include article-more($base);
+      margin-top: 20px * $base;
+    }
+  }
+  .services {
+    &__header {
+      @include article-header($base);
+    }
+
+    &__item {
+      margin-bottom: 17px * $base;
+    }
+
+    &__img {
+      width: 64px * $base;
+      height: 64px * $base;
+    }
+
+    &__text {
+      margin-left: 18px * $base;
+    }
+
+    &__title {
+      margin-bottom: 4px * $base;
+      line-height: 21px * $base;
+      font-size: 14px * $base;
+      letter-spacing: 1.3px * $base;
+    }
+
+    &__description {
+      font-size: 13px * $base;
+      line-height: 18px * $base;
+      letter-spacing: 0.37px * $base;
+    }
+
+    &__more {
+      @include article-more($base);
+      line-height: 1px * $base;
+    }
+  }
+  .comments {
+    &__header {
+      @include article-header($base);
+      margin-bottom: 13px * $base;
+    }
+
+    &__item {
+      margin-bottom: 12px * $base;
+    }
+
+    &__title {
+      margin-bottom: 8px * $base;
+    }
+
+    &__quotes {
+      width: 53px * $base;
+      height: 44px * $base;
+    }
+
+    &__name {
+      font-size: 16px * $base;
+      margin-left: 10px * $base;
+      letter-spacing: 1.6px * $base;
+      letter-spacing: 1px * $base;
+    }
+
+    &__text {
+      font-size: 13px * $base;
+      line-height: 19px * $base;
+      letter-spacing: 0.5px * $base;
+    }
+
+    &__more {
+      @include article-more($base);
+      line-height: 24px * $base;
+    }
+  }
+  .footer {
+    &__wrapper {
+      width: 960px * $base;
+    }
+
+    &__top {
+      grid-gap: 18px * $base;
+      padding-bottom: 12px * $base;
+      border-bottom: 1px * $base solid $black-light;
+    }
+
+    &__bottom {
+      padding: 22px * $base 0 21px * $base;
+      font-size: 12px * $base;
+      letter-spacing: 0.5px * $base;
+    }
+  }
+  .details {
+    &__header {
+      @include footer-header($base);
+    }
+
+    &__items {
+      margin-bottom: 15px * $base;
+    }
+
+    &__item {
+      font-size: 12px * $base;
+      line-height: 19.5px * $base;
+      letter-spacing: 0.6px * $base;
+    }
+  }
+  .social {
+    &__header {
+      @include footer-header($base);
+    }
+
+    &__item {
+      margin-bottom: 16px * $base;
+      border-bottom: 1px * $base solid $black-light;
+      font-size: 13px * $base;
+
+      &:hover {
+        .social__round {
+          border: 1px * $base solid $green;
+        }
+      }
+    }
+
+    &__round {
+      width: 32px * $base;
+      height: 32px * $base;
+      border: 1px * $base solid $black;
+    }
+
+    &__svg {
+      width: 15px * $base;
+      height: 15px * $base;
+    }
+
+    &__link {
+      padding-left: 10px * $base;
+      padding-top: 12px * $base;
+      padding-bottom: 14px * $base;
+    }
+  }
+  .blog {
+    &__header {
+      @include footer-header($base);
+    }
+
+    &__item {
+      margin-bottom: 7px * $base;
+    }
+
+    &__title {
+      font-size: 13px * $base;
+      line-height: 20px * $base;
+      letter-spacing: 1.4px * $base;
+    }
+
+    &__autor {
+      font-size: 11px * $base;
+      line-height: 22px * $base;
+      letter-spacing: 1px * $base;
+    }
+
+    &__text {
+      font-size: 12px * $base;
+      line-height: 20px * $base;
+      letter-spacing: 0.65px * $base;
+    }
+
+    &__more {
+      font-size: 12px * $base;
+      line-height: 31px * $base;
+    }
+  }
+  .contact-us {
+    &__header {
+      @include footer-header($base);
+    }
+
+    &__form {
+      padding-top: 2px * $base;
+    }
+
+    &__name,
+    &__email,
+    &__message {
+      margin-bottom: 12px * $base;
+      border-radius: 5px * $base;
+      padding: 8px * $base 10px * $base;
+      font-size: 13px * $base;
+    }
+
+    &__message {
+      height: 110px * $base;
+      margin-bottom: 6px * $base;
+    }
+
+    &__button {
+      padding: 7px * $base 14px * $base;
+      border-radius: 5px * $base;
+      border: 1px * $base solid $green;
+      font-size: 13px * $base;
+
+      &:hover {
+        border: 1px * $base solid $green;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .container {
+    width: 1000px * $normal;
+  }
+
+  .green-line {
+    width: 960px * $normal;
+    margin: 0 auto;
+    height: 5px * $normal;
+  }
+
+  .wrapper {
+    width: 960px * $normal;
+    padding: 0 20px * $normal;
+  }
+
+  .header {
+    height: 96px * $normal;
+  }
+
+  .logo {
+    &__name {
+      font-size: 26px * $normal;
+      line-height: 24px * $normal;
+
+      &::first-letter {
+        font-size: 32px * $normal;
+      }
+    }
+
+    &__tagline {
+      font-size: 12px * $normal;
+      letter-spacing: 0.3px * $normal;
+    }
+  }
+  .menu {
+    &__list {
+      width: 633px * $normal;
+    }
+
+    &__item {
+      padding: 51px * $normal 16px * $normal 0;
+      font-size: 14px * $normal;
+    }
+  }
+
+  .main {
+    padding-bottom: 37px * $normal;
+  }
+
+  .gallery {
+    height: 562px * $normal;
+    padding-top: 37px * $normal;
+    border-top: 1px * $normal solid $green;
+
+    &__quote {
+      width: 760px * $normal;
+      margin-bottom: 37px * $normal;
+      line-height: 31px * $normal;
+      font-size: 22px * $normal;
+    }
+  }
+  .slider {
+    height: 385px * $normal;
+
+    &__text {
+      width: 350px * $normal;
+      bottom: 58px * $normal;
+      right: 62px * $normal;
+    }
+
+    &__header {
+      margin-bottom: 10px * $normal;
+      padding: 9px * $normal 0;
+      text-align: center;
+      font-size: 22px * $normal;
+      line-height: 22px * $normal;
+    }
+
+    &__description {
+      padding: 11px * $normal 12px * $normal;
+      font-size: 13px * $normal;
+      letter-spacing: 0.5px * $normal;
+      line-height: 15px * $normal;
+    }
+
+    &__photos {
+      width: 920px * $normal;
+      height: 350px * $normal;
+    }
+
+    &__arrows {
+      top: 142px * $normal;
+      padding: 0 10px * $normal;
+
+      .arrow {
+        &__prev,
+        &__next {
+          width: 52px * $normal;
+          height: 52px * $normal;
+          border: 2px * $normal solid $green;
+        }
+
+        &__svg {
+          width: 15px * $normal;
+        }
+      }
+    }
+
+    &__dots {
+      width: 94px * $normal;
+    }
+
+    &__dot {
+      width: 15px * $normal;
+      height: 15px * $normal;
+      border: 3px * $normal solid $green;
+    }
+  }
+
+  .articles {
+    grid-gap: 40px * $normal;
+    padding-top: 39px * $normal;
+    border-top: 1px * $normal solid $white-dark;
+  }
+
+  .about {
+    &__header {
+      @include article-header($normal);
+    }
+
+    &__photo {
+      padding: 4px * $normal;
+      border: 1px * $normal solid $white-dark;
+    }
+
+    &__img {
+      width: 270px * $normal;
+      height: 140px * $normal;
+    }
+
+    &__description {
+      margin-top: 18.5px * $normal;
+      font-size: 13px * $normal;
+      letter-spacing: 0.45px * $normal;
+      line-height: 19px * $normal;
+    }
+
+    &__more {
+      @include article-more($normal);
+      margin-top: 20px * $normal;
+    }
+  }
+  .services {
+    &__header {
+      @include article-header($normal);
+    }
+
+    &__item {
+      margin-bottom: 17px * $normal;
+    }
+
+    &__img {
+      width: 64px * $normal;
+      height: 64px * $normal;
+    }
+
+    &__text {
+      margin-left: 18px * $normal;
+    }
+
+    &__title {
+      margin-bottom: 4px * $normal;
+      line-height: 21px * $normal;
+      font-size: 14px * $normal;
+      letter-spacing: 1.3px * $normal;
+    }
+
+    &__description {
+      font-size: 13px * $normal;
+      line-height: 18px * $normal;
+      letter-spacing: 0.37px * $normal;
+    }
+
+    &__more {
+      @include article-more($normal);
+      line-height: 1px * $normal;
+    }
+  }
+  .comments {
+    &__header {
+      @include article-header($normal);
+      margin-bottom: 13px * $normal;
+    }
+
+    &__item {
+      margin-bottom: 12px * $normal;
+    }
+
+    &__title {
+      margin-bottom: 8px * $normal;
+    }
+
+    &__quotes {
+      width: 53px * $normal;
+      height: 44px * $normal;
+    }
+
+    &__name {
+      font-size: 16px * $normal;
+      margin-left: 10px * $normal;
+      letter-spacing: 1.6px * $normal;
+      letter-spacing: 1px * $normal;
+    }
+
+    &__text {
+      font-size: 13px * $normal;
+      line-height: 19px * $normal;
+      letter-spacing: 0.5px * $normal;
+    }
+
+    &__more {
+      @include article-more($normal);
+      line-height: 24px * $normal;
+    }
+  }
+  .footer {
+    &__wrapper {
+      width: 960px * $normal;
+    }
+
+    &__top {
+      grid-gap: 18px * $normal;
+      padding-bottom: 12px * $normal;
+      border-bottom: 1px * $normal solid $black-light;
+    }
+
+    &__bottom {
+      padding: 22px * $normal 0 21px * $normal;
+      font-size: 12px * $normal;
+      letter-spacing: 0.5px * $normal;
+    }
+  }
+  .details {
+    &__header {
+      @include footer-header($normal);
+    }
+
+    &__items {
+      margin-bottom: 15px * $normal;
+    }
+
+    &__item {
+      font-size: 12px * $normal;
+      line-height: 19.5px * $normal;
+      letter-spacing: 0.6px * $normal;
+    }
+  }
+  .social {
+    &__header {
+      @include footer-header($normal);
+    }
+
+    &__item {
+      margin-bottom: 16px * $normal;
+      border-bottom: 1px * $normal solid $black-light;
+      font-size: 13px * $normal;
+
+      &:hover {
+        .social__round {
+          border: 1px * $normal solid $green;
+        }
+      }
+    }
+
+    &__round {
+      width: 32px * $normal;
+      height: 32px * $normal;
+      border: 1px * $normal solid $black;
+    }
+
+    &__svg {
+      width: 15px * $normal;
+      height: 15px * $normal;
+    }
+
+    &__link {
+      padding-left: 10px * $normal;
+      padding-top: 12px * $normal;
+      padding-bottom: 14px * $normal;
+    }
+  }
+  .blog {
+    &__header {
+      @include footer-header($normal);
+    }
+
+    &__item {
+      margin-bottom: 7px * $normal;
+    }
+
+    &__title {
+      font-size: 13px * $normal;
+      line-height: 20px * $normal;
+      letter-spacing: 1.4px * $normal;
+    }
+
+    &__autor {
+      font-size: 11px * $normal;
+      line-height: 22px * $normal;
+      letter-spacing: 1px * $normal;
+    }
+
+    &__text {
+      font-size: 12px * $normal;
+      line-height: 20px * $normal;
+      letter-spacing: 0.65px * $normal;
+    }
+
+    &__more {
+      font-size: 12px * $normal;
+      line-height: 31px * $normal;
+    }
+  }
+  .contact-us {
+    &__header {
+      @include footer-header($normal);
+    }
+
+    &__form {
+      padding-top: 2px * $normal;
+    }
+
+    &__name,
+    &__email,
+    &__message {
+      margin-bottom: 12px * $normal;
+      border-radius: 5px * $normal;
+      padding: 8px * $normal 10px * $normal;
+      font-size: 13px * $normal;
+    }
+
+    &__message {
+      height: 110px * $normal;
+      margin-bottom: 6px * $normal;
+    }
+
+    &__button {
+      padding: 7px * $normal 14px * $normal;
+      border-radius: 5px * $normal;
+      border: 1px * $normal solid $green;
+      font-size: 13px * $normal;
+
+      &:hover {
+        border: 1px * $normal solid $green;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .container {
+    width: 1000px * $middle;
+  }
+
+  .green-line {
+    width: 960px * $middle;
+    margin: 0 auto;
+    height: 5px * $middle;
+  }
+
+  .wrapper {
+    width: 960px * $middle;
+    padding: 0 20px * $middle;
+  }
+
+  .header {
+    height: 96px * $middle;
+  }
+
+  .logo {
+    &__name {
+      font-size: 26px * $middle;
+      line-height: 24px * $middle;
+
+      &::first-letter {
+        font-size: 32px * $middle;
+      }
+    }
+
+    &__tagline {
+      font-size: 12px * $middle;
+      letter-spacing: 0.3px * $middle;
+    }
+  }
+  .menu {
+    &__list {
+      width: 633px * $middle;
+    }
+
+    &__item {
+      padding: 51px * $middle 16px * $middle 0;
+      font-size: 14px * $middle;
+    }
+  }
+
+  .main {
+    padding-bottom: 37px * $middle;
+  }
+
+  .gallery {
+    height: 562px * $middle;
+    padding-top: 37px * $middle;
+    border-top: 1px * $middle solid $green;
+
+    &__quote {
+      width: 760px * $middle;
+      margin-bottom: 37px * $middle;
+      line-height: 31px * $middle;
+      font-size: 22px * $middle;
+    }
+  }
+  .slider {
+    height: 385px * $middle;
+
+    &__text {
+      width: 350px * $middle;
+      bottom: 58px * $middle;
+      right: 62px * $middle;
+    }
+
+    &__header {
+      margin-bottom: 10px * $middle;
+      padding: 9px * $middle 0;
+      text-align: center;
+      font-size: 22px * $middle;
+      line-height: 22px * $middle;
+    }
+
+    &__description {
+      padding: 11px * $middle 12px * $middle;
+      font-size: 13px * $middle;
+      letter-spacing: 0.5px * $middle;
+      line-height: 15px * $middle;
+    }
+
+    &__photos {
+      width: 920px * $middle;
+      height: 350px * $middle;
+    }
+
+    &__arrows {
+      top: 142px * $middle;
+      padding: 0 10px * $middle;
+
+      .arrow {
+        &__prev,
+        &__next {
+          width: 52px * $middle;
+          height: 52px * $middle;
+          border: 2px * $middle solid $green;
+        }
+
+        &__svg {
+          width: 15px * $middle;
+        }
+      }
+    }
+
+    &__dots {
+      width: 94px * $middle;
+    }
+
+    &__dot {
+      width: 15px * $middle;
+      height: 15px * $middle;
+      border: 3px * $middle solid $green;
+    }
+  }
+
+  .articles {
+    grid-gap: 40px * $middle;
+    padding-top: 39px * $middle;
+    border-top: 1px * $middle solid $white-dark;
+  }
+
+  .about {
+    &__header {
+      @include article-header($middle);
+    }
+
+    &__photo {
+      padding: 4px * $middle;
+      border: 1px * $middle solid $white-dark;
+    }
+
+    &__img {
+      width: 270px * $middle;
+      height: 140px * $middle;
+    }
+
+    &__description {
+      margin-top: 18.5px * $middle;
+      font-size: 13px * $middle;
+      letter-spacing: 0.45px * $middle;
+      line-height: 19px * $middle;
+    }
+
+    &__more {
+      @include article-more($middle);
+      margin-top: 20px * $middle;
+    }
+  }
+  .services {
+    &__header {
+      @include article-header($middle);
+    }
+
+    &__item {
+      margin-bottom: 17px * $middle;
+    }
+
+    &__img {
+      width: 64px * $middle;
+      height: 64px * $middle;
+    }
+
+    &__text {
+      margin-left: 18px * $middle;
+    }
+
+    &__title {
+      margin-bottom: 4px * $middle;
+      line-height: 21px * $middle;
+      font-size: 14px * $middle;
+      letter-spacing: 1.3px * $middle;
+    }
+
+    &__description {
+      font-size: 13px * $middle;
+      line-height: 18px * $middle;
+      letter-spacing: 0.37px * $middle;
+    }
+
+    &__more {
+      @include article-more($middle);
+      line-height: 1px * $middle;
+    }
+  }
+  .comments {
+    &__header {
+      @include article-header($middle);
+      margin-bottom: 13px * $middle;
+    }
+
+    &__item {
+      margin-bottom: 12px * $middle;
+    }
+
+    &__title {
+      margin-bottom: 8px * $middle;
+    }
+
+    &__quotes {
+      width: 53px * $middle;
+      height: 44px * $middle;
+    }
+
+    &__name {
+      font-size: 16px * $middle;
+      margin-left: 10px * $middle;
+      letter-spacing: 1.6px * $middle;
+      letter-spacing: 1px * $middle;
+    }
+
+    &__text {
+      font-size: 13px * $middle;
+      line-height: 19px * $middle;
+      letter-spacing: 0.5px * $middle;
+    }
+
+    &__more {
+      @include article-more($middle);
+      line-height: 24px * $middle;
+    }
+  }
+  .footer {
+    &__wrapper {
+      width: 960px * $middle;
+    }
+
+    &__top {
+      grid-gap: 18px * $middle;
+      padding-bottom: 12px * $middle;
+      border-bottom: 1px * $middle solid $black-light;
+    }
+
+    &__bottom {
+      padding: 22px * $middle 0 21px * $middle;
+      font-size: 12px * $middle;
+      letter-spacing: 0.5px * $middle;
+    }
+  }
+  .details {
+    &__header {
+      @include footer-header($middle);
+    }
+
+    &__items {
+      margin-bottom: 15px * $middle;
+    }
+
+    &__item {
+      font-size: 12px * $middle;
+      line-height: 19.5px * $middle;
+      letter-spacing: 0.6px * $middle;
+    }
+  }
+  .social {
+    &__header {
+      @include footer-header($middle);
+    }
+
+    &__item {
+      margin-bottom: 16px * $middle;
+      border-bottom: 1px * $middle solid $black-light;
+      font-size: 13px * $middle;
+
+      &:hover {
+        .social__round {
+          border: 1px * $middle solid $green;
+        }
+      }
+    }
+
+    &__round {
+      width: 32px * $middle;
+      height: 32px * $middle;
+      border: 1px * $middle solid $black;
+    }
+
+    &__svg {
+      width: 15px * $middle;
+      height: 15px * $middle;
+    }
+
+    &__link {
+      padding-left: 10px * $middle;
+      padding-top: 12px * $middle;
+      padding-bottom: 14px * $middle;
+    }
+  }
+  .blog {
+    &__header {
+      @include footer-header($middle);
+    }
+
+    &__item {
+      margin-bottom: 7px * $middle;
+    }
+
+    &__title {
+      font-size: 13px * $middle;
+      line-height: 20px * $middle;
+      letter-spacing: 1.4px * $middle;
+    }
+
+    &__autor {
+      font-size: 11px * $middle;
+      line-height: 22px * $middle;
+      letter-spacing: 1px * $middle;
+    }
+
+    &__text {
+      font-size: 12px * $middle;
+      line-height: 20px * $middle;
+      letter-spacing: 0.65px * $middle;
+    }
+
+    &__more {
+      font-size: 12px * $middle;
+      line-height: 31px * $middle;
+    }
+  }
+  .contact-us {
+    &__header {
+      @include footer-header($middle);
+    }
+
+    &__form {
+      padding-top: 2px * $middle;
+    }
+
+    &__name,
+    &__email,
+    &__message {
+      margin-bottom: 12px * $middle;
+      border-radius: 5px * $middle;
+      padding: 8px * $middle 10px * $middle;
+      font-size: 13px * $middle;
+    }
+
+    &__message {
+      height: 110px * $middle;
+      margin-bottom: 6px * $middle;
+    }
+
+    &__button {
+      padding: 7px * $middle 14px * $middle;
+      border-radius: 5px * $middle;
+      border: 1px * $middle solid $green;
+      font-size: 13px * $middle;
+
+      &:hover {
+        border: 1px * $middle solid $green;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .container {
+    width: 1000px * $small;
+  }
+
+  .green-line {
+    width: 960px * $small;
+    margin: 0 auto;
+    height: 5px;
+  }
+
+  .wrapper {
+    width: 960px * $small;
+    padding: 0 20px * $small;
+  }
+
+  .header {
+    height: 96px;
+  }
+
+  .logo {
+    &__name {
+      font-size: 34px;
+      line-height: 32px;
+
+      &::first-letter {
+        font-size: 40px;
+      }
+    }
+
+    &__tagline {
+      font-size: 16px;
+      letter-spacing: 0.3px * $small;
+    }
+  }
+  .menu {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__burger {
+      display: block;
+      width: 40px;
+      height: 40px;
+      fill: $grey-dark;
+      transition: 0.3s;
+
+      &:hover {
+        fill: $green;
+      }
+    }
+
+    &__list {
+      position: absolute;
+      right: -1000px;
+      flex-direction: column;
+      width: 150px;
+      height: 200px;
+      z-index: 10;
+      background-color: $white;
+      transition: 0.3s;
+
+      &_open {
+        right: 0;
+        top: 0;
+      }
+    }
+
+    &__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      padding: 0;
+      font-size: 12px;
+      border-bottom: 1px solid $white-dark;
+
+      &:last-of-type {
+        border: 0;
+      }
+    }
+  }
+
+  .main {
+    padding-bottom: 37px * $small;
+  }
+
+  .gallery {
+    height: 362px;
+    padding-top: 37px * $small;
+    border-top: 1px * $small solid $green;
+
+    &__quote {
+      width: 760px * $small;
+      margin-bottom: 37px * $small;
+      line-height: 31px * $small;
+      font-size: 16px;
+    }
+  }
+  .slider {
+    height: 385px * $small;
+
+    &__text {
+      width: 420px * $small;
+      bottom: 40px * $small;
+      right: 5px * $small;
+    }
+
+    &__header {
+      margin-bottom: 10px * $small;
+      padding: 9px * $small 0;
+      text-align: center;
+      font-size: 15px;
+      line-height: 22px * $small;
+    }
+
+    &__description {
+      padding: 11px * $small 12px * $small;
+      font-size: 18px * $small;
+      letter-spacing: 0.5px * $small;
+      line-height: 15px * $small;
+    }
+
+    &__photos {
+      width: 920px * $small;
+      height: 350px * $small;
+    }
+
+    &__arrows {
+      top: 136px * $small;
+      padding: 0 10px * $small;
+
+      .arrow {
+        &__prev,
+        &__next {
+          width: 50px;
+          height: 50px;
+          border: 2px * $small solid $green;
+        }
+
+        &__svg {
+          width: 25px * $small;
+        }
+      }
+    }
+
+    &__dots {
+      width: 94px;
+    }
+
+    &__dot {
+      width: 15px;
+      height: 15px;
+      border: 3pxsolid $green;
+    }
+  }
+
+  .articles {
+    display: flex;
+    flex-direction: column;
+    padding-top: 39px * $small;
+    border-top: 1px * $small solid $white-dark;
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 0.5fr 0.5fr 0.5fr 0.2fr;
+    justify-items: center;
+    grid-gap: 10px;
+
+    &__header {
+      grid-column: 1/3;
+      @include article-header();
+    }
+
+    &__photo {
+      width: 280px;
+      height: 150px;
+      grid-column: 1/2;
+      grid-row: 2/5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $white-dark;
+    }
+
+    &__img {
+      width: 270px;
+      height: 140px;
+    }
+
+    &__description {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      margin-top: 0;
+      font-size: 12px;
+      letter-spacing: 0.45px * $small;
+      line-height: 12px;
+
+      &:last-of-type {
+        grid-row: 3/4;
+      }
+    }
+
+    &__more {
+      @include article-more();
+      margin-top: 10px * $small;
+      justify-self: flex-end;
+    }
+  }
+  .services {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      @include article-header();
+      align-self: center;
+    }
+
+    &__items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__item {
+      margin-bottom: 17px * $small;
+    }
+
+    &__img {
+      width: 64px;
+      height: 64px;
+    }
+
+    &__text {
+      margin-left: 18px * $small;
+    }
+
+    &__title {
+      margin-bottom: 4px * $small;
+      line-height: 21px;
+      font-size: 14px;
+      letter-spacing: 1.3px;
+    }
+
+    &__description {
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.37px * $small;
+    }
+
+    &__more {
+      @include article-more();
+      line-height: 40px;
+    }
+  }
+  .comments {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      align-self: center;
+      @include article-header();
+      margin-bottom: 13px * $small;
+    }
+
+    &__item {
+      margin-bottom: 12px * $small;
+    }
+
+    &__title {
+      margin-bottom: 8px * $small;
+    }
+
+    &__quotes {
+      width: 53px;
+      height: 44px;
+    }
+
+    &__name {
+      font-size: 14px;
+      margin-left: 10px * $small;
+      letter-spacing: 1.6px;
+    }
+
+    &__text {
+      font-size: 12px;
+      line-height: 19px;
+      letter-spacing: 0.2px * $small;
+    }
+
+    &__more {
+      @include article-more();
+      line-height: 24px;
+    }
+  }
+  .footer {
+    &__wrapper {
+      width: 960px * $small;
+    }
+
+    &__top {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 18px * $small;
+      padding-bottom: 12px * $small;
+      border-bottom: 1px * $small solid $black-light;
+    }
+
+    &__bottom {
+      padding: 22px * $small 0 29px * $small;
+      font-size: 10px;
+      letter-spacing: 0.5px * $small;
+    }
+  }
+  .details {
+    &__header {
+      @include footer-header();
+    }
+
+    &__items {
+      margin-bottom: 15px;
+    }
+
+    &__item {
+      font-size: 12px;
+      line-height: 19.5px;
+      letter-spacing: 0.6px;
+    }
+  }
+  .social {
+    &__header {
+      @include footer-header();
+    }
+
+    &__item {
+      margin-bottom: 16px;
+      border-bottom: 1px solid $black-light;
+      font-size: 13px;
+
+      &:hover {
+        .social__round {
+          border: 1px solid $green;
+        }
+      }
+    }
+
+    &__round {
+      width: 32px;
+      height: 32px;
+      border: 1px solid $black;
+    }
+
+    &__svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    &__link {
+      padding-left: 10px;
+      padding-top: 12px;
+      padding-bottom: 14px;
+    }
+  }
+  .blog {
+    &__header {
+      @include footer-header();
+    }
+
+    &__item {
+      margin-bottom: 7px;
+    }
+
+    &__title {
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 1.4px;
+    }
+
+    &__autor {
+      font-size: 11px;
+      line-height: 22px;
+      letter-spacing: 1px;
+    }
+
+    &__text {
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: 0.65px;
+    }
+
+    &__more {
+      font-size: 12px;
+      line-height: 31px;
+    }
+  }
+  .contact-us {
+    &__header {
+      @include footer-header();
+    }
+
+    &__form {
+      padding-top: 2px;
+    }
+
+    &__name,
+    &__email,
+    &__message {
+      margin-bottom: 12px;
+      border-radius: 5px;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    &__message {
+      height: 110px;
+      margin-bottom: 6px;
+    }
+
+    &__button {
+      padding: 7px 14px;
+      border-radius: 5px;
+      border: 1px solid $green;
+      font-size: 13px;
+
+      &:hover {
+        border: 1px solid $green;
+      }
+    }
+  }
+}
