@@ -166,16 +166,11 @@ h6 {
 .menu__item {
   height: 100%;
   text-align: center;
-  padding: 51px 16px 0;
+  padding: 51px 15px 0;
   font-size: 14px;
   color: #979797;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-}
-
-.menu__item:last-of-type {
-  text-align: right;
-  padding-right: 0;
 }
 
 .menu__item_choosed {
@@ -778,7 +773,7 @@ h6 {
     width: 759.6px;
   }
   .menu__item {
-    padding: 61.2px 19.2px 0;
+    padding: 61.2px 18px 0;
     font-size: 16.8px;
   }
   .main {
@@ -1108,7 +1103,7 @@ h6 {
     width: 569.7px;
   }
   .menu__item {
-    padding: 45.9px 14.4px 0;
+    padding: 45.9px 13.5px 0;
     font-size: 12.6px;
   }
   .main {
@@ -1438,7 +1433,7 @@ h6 {
     width: 506.4px;
   }
   .menu__item {
-    padding: 40.8px 12.8px 0;
+    padding: 40.8px 12px 0;
     font-size: 11.2px;
   }
   .main {
@@ -1768,7 +1763,7 @@ h6 {
     width: 443.1px;
   }
   .menu__item {
-    padding: 35.7px 11.2px 0;
+    padding: 35.7px 10.5px 0;
     font-size: 9.8px;
   }
   .main {

@@ -111,15 +111,10 @@ $green: #a7c353;
   &__item {
     height: 100%;
     text-align: center;
-    padding: 51px 16px 0;
+    padding: 51px 15px 0;
     font-size: 14px;
     color: $grey-light;
     transition: 0.3s;
-
-    &:last-of-type {
-      text-align: right;
-      padding-right: 0;
-    }
 
     &_choosed {
       background-color: $green;
@@ -632,7 +627,7 @@ $small: 0.6;
     }
 
     &__item {
-      padding: 51px * $large 16px * $large 0;
+      padding: 51px * $large 15px * $large 0;
       font-size: 14px * $large;
     }
   }
@@ -992,7 +987,7 @@ $small: 0.6;
     }
 
     &__item {
-      padding: 51px * $base 16px * $base 0;
+      padding: 51px * $base 15px * $base 0;
       font-size: 14px * $base;
     }
   }
@@ -1352,7 +1347,7 @@ $small: 0.6;
     }
 
     &__item {
-      padding: 51px * $normal 16px * $normal 0;
+      padding: 51px * $normal 15px * $normal 0;
       font-size: 14px * $normal;
     }
   }
@@ -1712,7 +1707,7 @@ $small: 0.6;
     }
 
     &__item {
-      padding: 51px * $middle 16px * $middle 0;
+      padding: 51px * $middle 15px * $middle 0;
       font-size: 14px * $middle;
     }
   }
